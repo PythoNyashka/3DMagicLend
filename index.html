@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Лендос</title>
-    <link href="index.css?_=2020.2" rel="stylesheet" />
-    <link href="mobile.css?_=2020.2" rel="stylesheet" />
+    <link href="index.css?_=2020.3" rel="stylesheet" />
+    <link href="mobile.css?_=2020.17" rel="stylesheet" />
+    <!-- additional "price" block -->
+    <link href="price.css?_=2020.11" rel="stylesheet" />
+
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6463f77c-c580-443a-8d38-a9b2ff5db57f&lang=ru_RU" type="text/javascript"></script>
 </head>
 <body>
@@ -107,6 +110,35 @@
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
+        </section>
+        <section class="block block-prices">
+            <div class="price_wrap">
+                <div class="price_header-btns">
+                    <div @click="changePrices(1)" :class="'price_header-btn price_header-left ' + (chosenPrices.id === 1 && 'chosen')">
+                        ФДМ печать
+                    </div>
+                    <div @click="changePrices(2)" :class="'price_header-btn price_header-right ' + (chosenPrices.id === 2 && 'chosen')">
+                        Фотополимерная печать
+                    </div>
+                </div>
+                <div class="price_block">
+                    <div class="price_images">
+                        <transition-group name="list">
+                            <div v-for="p in chosenImages.list" :key="p.src" class="price_image">
+                                <div :style="`background-image: url('./images/${p.src}');`"></div>
+                            </div>
+                        </transition-group>
+                    </div>
+                    <div class="price_buttons">
+                        <div v-for="b in chosenPrices.content" :key="b.id" class="price_button-block">
+                            <div class="price_title">{{b.title}}</div>
+                            <button :class="innerPrices === b.id ? 'chosen' : ''" @click="rotatePricesImages(b.id)">от {{b.price}} за гр.</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="block">
             <div class="form-wrap">
                 <form class="form">
                     <div class="form_header">Форма заполнения</div>
@@ -245,7 +277,27 @@
                         tg: "3dmagic",
                         wu: "+79000000",
                         ig: "3dmagic"
-                    }
+                    },
+                    prices: [
+                        {
+                            id: 1,
+                            content: [
+                                {id: 1, price: "100", title: "Низкая скорость"}, {id: 2, price: "200", title: "Средняя скорость"}, {id: 3, price: "300", title: "Высокая скорость"}
+                            ]
+                        },
+                        {
+                            id: 2,
+                            content: [
+                                {id: 1, price: "1000", title: "Стоимость"}
+                            ]
+                        },
+                    ],
+                    pricesImages: [
+                        {id: 1, list: [{id: 1, src: "itsatrap.png"}, {id: 2, src: "astolfo.jpg"}, {id: 3, src: "anime.jpg"}]},
+                        {id: 2, list: [{id: 1, src: "gachi2.jpg"}]}
+                    ],
+                    currentPrices: 1,
+                    innerPrices: 3,
                 }
             },
             methods: {
@@ -253,6 +305,26 @@
                     let element = this.$refs[refName];
                     element.scrollIntoView({ behavior: 'smooth' });
 
+                },
+                rotatePricesImages(v) {
+                    if(this.innerPrices !== v) {
+                        this.innerPrices = v;
+                        const temp = this.chosenImages.list.find(p => p.id === v)
+                        this.chosenImages.list = this.chosenImages.list.filter(p => p.id !== v)
+                        setTimeout(() => this.chosenImages.list.push(temp), 200)
+                    }
+                },
+                changePrices(v) {
+                    this.innerPrices = 1;
+                    this.currentPrices = v;
+                }
+            },
+            computed: {
+                chosenPrices() {
+                    return this.prices.find(pr => pr.id === this.currentPrices)
+                },
+                chosenImages() {
+                    return this.pricesImages.find(pr => pr.id === this.chosenPrices.id)
                 }
             },
             mounted() {
