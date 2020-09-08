@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Лендос</title>
     <link href="index.css?_=2020.5" rel="stylesheet" />
-    <link href="mobile.css?_=2020.19" rel="stylesheet" />
+    <link href="mobile.css?_=2020.20" rel="stylesheet" />
     <!-- additional "price" block -->
     <link href="price.css?_=2020.11" rel="stylesheet" />
 
@@ -35,368 +35,368 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6463f77c-c580-443a-8d38-a9b2ff5db57f&lang=ru_RU" type="text/javascript"></script>
 </head>
 <body>
-    <div id="app">
-        <section class="block block-header">
-                <div class="block-header_wrap">
-                    <div class="header-links">
-                        <div class="header-link">
-                            <div class="header-logo">
-                            </div>
-                        </div>
-                        <div class="header-link header-link_right">
-                            <div class="header-link_phone"><a :href="`tel:${links.wu}`"><div class="header-link_phone-icon"></div>{{ links.phone }}</a></div>
-                        </div>
-                    </div>
-                    <div class="block-header_block">
-                        <div class="block-header_title">
-                            Воплощаем ваши безумные<br> идеи в реальность
-                        </div>
-                        <div class="block-header_desc">
-                            Изготовление 3D-фигурки человека — это шанс<br> воплотить в реальность мгновения, которые мы<br> бережно храним в памяти
-                        </div>
-                        <div class="block-header_button">
-                            <button @click="goTo('threed')">
-                                3D печать
-                            </button>
-                        </div>
+<div id="app">
+    <section class="block block-header">
+        <div class="block-header_wrap">
+            <div class="header-links">
+                <div class="header-link">
+                    <div class="header-logo">
                     </div>
                 </div>
-            <div class="block-header_wave">
-                <div class="block-header_wave-svg">
-                    <div class="wave" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png'); background-size: 50% 120px; animation: move_wave 30s linear infinite;">
+                <div class="header-link header-link_right">
+                    <div class="header-link_phone"><a :href="`tel:${links.wu}`"><div class="header-link_phone-icon"></div>{{ links.phone }}</a></div>
+                </div>
+            </div>
+            <div class="block-header_block">
+                <div class="block-header_title">
+                    Воплощаем ваши безумные<br> идеи в реальность
+                </div>
+                <div class="block-header_desc">
+                    Изготовление 3D-фигурки человека — это шанс<br> воплотить в реальность мгновения, которые мы<br> бережно храним в памяти
+                </div>
+                <div class="block-header_button">
+                    <button @click="goTo('threed')">
+                        3D печать
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="block-header_wave">
+            <div class="block-header_wave-svg">
+                <div class="wave" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png'); background-size: 50% 120px; animation: move_wave 0s linear infinite;">
 
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="threed" ref="threed" class="block block-1">
+        <div class="block-header_wave-text">
+            <span>Так что же такое</span> <div><span style="color: #09ad90;margin-left:8px">3D печать</span>?</div>
+        </div>
+        <div class="threed-block">
+            <div class="threed-block_circles">
+                <div v-for="t in threed" :key="t.id" :class="`threed-block_circles-wrap ${t.id === threedCur && 'threed-block_circles-current'}`" @click="threedCur = t.id">
+                    <div class="threed-block_circle">
+                        <div class="threed-block_circle-help">
+                            <img :src="`./images/${t.icon}`"  :alt="t.icon"/>
+                        </div>
+                    </div>
+                    <div class="threed-block_text">
+                        {{ t.title }}
                     </div>
                 </div>
             </div>
-        </section>
-        <section id="threed" ref="threed" class="block block-1">
-            <div class="block-header_wave-text">
-                <span>Так что же такое</span> <div><span style="color: #09ad90;margin-left:8px">3D печать</span>?</div>
-            </div>
-            <div class="threed-block">
-                <div class="threed-block_circles">
-                    <div v-for="t in threed" :key="t.id" :class="`threed-block_circles-wrap ${t.id === threedCur && 'threed-block_circles-current'}`" @click="threedCur = t.id">
-                        <div class="threed-block_circle">
-                            <div class="threed-block_circle-help">
-                                <img :src="`./images/${t.icon}`"  :alt="t.icon"/>
-                            </div>
-                        </div>
-                        <div class="threed-block_text">
-                            {{ t.title }}
-                        </div>
-                    </div>
+            <div class="threed-block_info-wrap">
+                <div v-for="t in threed" :key="`heh-${t.id}`" class="threed-block_info-trap">
+                    <transition name="fade">
+                        <div v-if="threedCur === t.id" :style="`background-image: url('./images/${t.src}')`"></div>
+                    </transition>
                 </div>
-                <div class="threed-block_info-wrap">
-                    <div v-for="t in threed" :key="`heh-${t.id}`" class="threed-block_info-trap">
+                <div class="threed-block_info">
+                    <div class="threed-block_text-head">
+                        {{ threed[threedCur-1].title }}
+                    </div>
+                    <div v-for="t in threed" :key="t.id" class="threed-block_info-text">
                         <transition name="fade">
-                            <div v-if="threedCur === t.id" :style="`background-image: url('./images/${t.src}')`"></div>
+                            <div v-if="threedCur === t.id" class="threed-block_info-current" v-html="t.text"></div>
                         </transition>
                     </div>
-                    <div class="threed-block_info">
-                        <div class="threed-block_text-head">
-                            {{ threed[threedCur-1].title }}
-                        </div>
-                        <div v-for="t in threed" :key="t.id" class="threed-block_info-text">
-                            <transition name="fade">
-                                <div v-if="threedCur === t.id" class="threed-block_info-current" v-html="t.text"></div>
-                            </transition>
-                        </div>
-                        <div class="threed-block_info-arr">
-                            <div><span style="display: inline-flex; width: 14px; justify-content: center">{{ threedCur }}</span> ИЗ {{ threed.length }}</div>
-                            <div class="threed-block_info-ctrl">
-                                <div    @click="threedCur > 1 && threedCur--"
-                                        :class="`threed-block_info-arrow threed-block_info-left ${ threedCur === 1 && 'threed-block_info-inactive' }`">
-                                    <div>
-                                        <img src="./images/arrow.svg" alt="left" />
-                                    </div>
+                    <div class="threed-block_info-arr">
+                        <div><span style="display: inline-flex; width: 14px; justify-content: center">{{ threedCur }}</span> ИЗ {{ threed.length }}</div>
+                        <div class="threed-block_info-ctrl">
+                            <div    @click="threedCur > 1 && threedCur--"
+                                    :class="`threed-block_info-arrow threed-block_info-left ${ threedCur === 1 && 'threed-block_info-inactive' }`">
+                                <div>
+                                    <img src="./images/arrow.svg" alt="left" />
                                 </div>
-                                <div    @click="threedCur < threed.length && threedCur++"
-                                        :class="`threed-block_info-arrow threed-block_info-right ${ threedCur === threed.length && 'threed-block_info-inactive' }`">
-                                    <div>
-                                        <img src="./images/arrow.svg" alt="right" />
-                                    </div>
+                            </div>
+                            <div    @click="threedCur < threed.length && threedCur++"
+                                    :class="`threed-block_info-arrow threed-block_info-right ${ threedCur === threed.length && 'threed-block_info-inactive' }`">
+                                <div>
+                                    <img src="./images/arrow.svg" alt="right" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="block block-2">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div v-for="(s, i) in slides" :key="i" class="swiper-slide">
-                        <img class="swiper-heh" :src="`./images/slider/${s}`" :alt="s"/>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        </section>
-        <section class="block block-prices">
-            <div class="price_wrap">
-                <div class="price_header-btns">
-                    <div @click="changePrices(1)" :class="'price_header-btn price_header-left ' + (chosenPrices.id === 1 && 'chosen')">
-                        ФДМ печать
-                    </div>
-                    <div @click="changePrices(2)" :class="'price_header-btn price_header-right ' + (chosenPrices.id === 2 && 'chosen')">
-                        Фотополимерная печать
-                    </div>
-                </div>
-                <div class="price_block">
-                    <div class="price_images">
-                        <transition-group name="list">
-                            <div v-for="p in chosenImages.list" :key="p.src" class="price_image">
-                                <div :style="`background-image: url('./images/${p.src}');`"></div>
-                            </div>
-                        </transition-group>
-                    </div>
-                    <div class="price_buttons">
-                        <div v-for="b in chosenPrices.content" :key="b.id" class="price_button-block">
-                            <div class="price_title">{{b.title}}</div>
-                            <button :class="innerPrices === b.id ? 'chosen' : ''" @click="rotatePricesImages(b.id)">от {{b.price}} за гр.</button>
-                        </div>
-                    </div>
+        </div>
+    </section>
+    <section class="block block-2">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div v-for="(s, i) in slides" :key="i" class="swiper-slide">
+                    <img class="swiper-heh" :src="`./images/slider/${s}`" :alt="s"/>
                 </div>
             </div>
-        </section>
-        <section class="block">
-            <div class="form-wrap">
-                <form class="form">
-                    <div class="form_header">Форма заполнения</div>
-                    <div class="form_fields">
-                        <div class="form_field">
-                            <div class="form_field-name">
-                                Введите ваше имя:
-                            </div>
-                            <div class="form_field-input">
-                                <input placeholder="Ваше имя..." />
-                            </div>
-                        </div>
-                        <div class="form_field">
-                            <div class="form_field-name">
-                                Введите ваш номер телефона или E-mail:
-                            </div>
-                            <div class="form_field-input">
-                                <input placeholder="Номер телефона или E-mail..." />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-btn">
-                        <button>Отправить</button>
-                    </div>
-                </form>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
+    <section class="block block-prices">
+        <div class="price_wrap">
+            <div class="price_header-btns">
+                <div @click="changePrices(1)" :class="'price_header-btn price_header-left ' + (chosenPrices.id === 1 && 'chosen')">
+                    ФДМ печать
+                </div>
+                <div @click="changePrices(2)" :class="'price_header-btn price_header-right ' + (chosenPrices.id === 2 && 'chosen')">
+                    Фотополимерная печать
+                </div>
             </div>
-        </section>
-        <section class="block block-3">
-            <div id="map"></div>
-            <div class="map-info_wrap">
-                <div class="map-info_block">
-                    <div class="map-info_title">
-                        Режим работы
+            <div class="price_block">
+                <div class="price_images">
+                    <transition-group name="list">
+                        <div v-for="p in chosenImages.list" :key="p.src" class="price_image">
+                            <div :style="`background-image: url('./images/${p.src}');`"></div>
+                        </div>
+                    </transition-group>
+                </div>
+                <div class="price_buttons">
+                    <div v-for="b in chosenPrices.content" :key="b.id" class="price_button-block">
+                        <div class="price_title">{{b.title}}</div>
+                        <button :class="innerPrices === b.id ? 'chosen' : ''" @click="rotatePricesImages(b.id)">от {{b.price}} за гр.</button>
                     </div>
-                    <div class="map-info_items">
-                        <div class="map-info_item">
-                            <img src="./images/time.svg" alt="mark"/> Ежедневно без выходных с 12:00 до 20:00
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="block">
+        <div class="form-wrap">
+            <form class="form">
+                <div class="form_header">Форма заполнения</div>
+                <div class="form_fields">
+                    <div class="form_field">
+                        <div class="form_field-name">
+                            Введите ваше имя:
+                        </div>
+                        <div class="form_field-input">
+                            <input placeholder="Ваше имя..." />
+                        </div>
+                    </div>
+                    <div class="form_field">
+                        <div class="form_field-name">
+                            Введите ваш номер телефона или E-mail:
+                        </div>
+                        <div class="form_field-input">
+                            <input placeholder="Номер телефона или E-mail..." />
                         </div>
                     </div>
                 </div>
-                <div class="map-info_block">
-                    <div class="map-info_title">
-                        Адрес
-                    </div>
-                    <div class="map-info_items">
-                        <div class="map-info_item">
-                            <img src="./images/mark.svg" alt="mark"/> г. Москва, ул. Пушкина, д. 14
-                        </div>
-                        <div class="map-info_item">
-                            <img src="./images/mark.svg" alt="mark"/> г. Москва, ул. Калатушкина, д. 88
-                        </div>
+                <div class="form-btn">
+                    <button>Отправить</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="block block-3">
+        <div id="map"></div>
+        <div class="map-info_wrap">
+            <div class="map-info_block">
+                <div class="map-info_title">
+                    Режим работы
+                </div>
+                <div class="map-info_items">
+                    <div class="map-info_item">
+                        <img src="./images/time.svg" alt="mark"/> Ежедневно без выходных с 12:00 до 20:00
                     </div>
                 </div>
-                <div class="map-info_block">
+            </div>
+            <div class="map-info_block">
+                <div class="map-info_title">
+                    Адрес
+                </div>
+                <div class="map-info_items">
+                    <div class="map-info_item">
+                        <img src="./images/mark.svg" alt="mark"/> г. Москва, ул. Пушкина, д. 14
+                    </div>
+                    <div class="map-info_item">
+                        <img src="./images/mark.svg" alt="mark"/> г. Москва, ул. Калатушкина, д. 88
+                    </div>
+                </div>
+            </div>
+            <div class="map-info_block">
 
-                </div>
             </div>
-            <div class="map-waves">
-                <div class="map-wave">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#09AD90" fill-opacity="1" d="M0,160L30,149.3C60,139,120,117,180,90.7C240,64,300,32,360,26.7C420,21,480,43,540,80C600,117,660,171,720,170.7C780,171,840,117,900,122.7C960,128,1020,192,1080,229.3C1140,267,1200,277,1260,282.7C1320,288,1380,288,1410,288L1440,288L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
-                </div>
-                <div class="map-wave">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#6A2EA6" fill-opacity="1" d="M0,0L30,0C60,0,120,0,180,32C240,64,300,128,360,144C420,160,480,128,540,133.3C600,139,660,181,720,186.7C780,192,840,160,900,176C960,192,1020,256,1080,272C1140,288,1200,256,1260,218.7C1320,181,1380,139,1410,117.3L1440,96L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
-                </div>
+        </div>
+        <div class="map-waves">
+            <div class="map-wave">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#09AD90" fill-opacity="1" d="M0,160L30,149.3C60,139,120,117,180,90.7C240,64,300,32,360,26.7C420,21,480,43,540,80C600,117,660,171,720,170.7C780,171,840,117,900,122.7C960,128,1020,192,1080,229.3C1140,267,1200,277,1260,282.7C1320,288,1380,288,1410,288L1440,288L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
             </div>
-        </section>
-        <footer>
-            <div class="footer-wrap">
-                <div class="footer-info">
-                    3D Magic — это шанс воплотить в реальность мгновения, которые мы бережно храним в памяти, остановить время, когда мы счастливы, когда мы любим и любимы.
-                </div>
-                <div class="footer-contacts">
-                    <div class="footer-contacts_block">
-                        <div class="footer-contacts_title">
-                            Способы связи
-                        </div>
-                        <div class="footer-contacts_items">
-                            <div class="footer-contacts_item">
-                                <a :href="`mailto:${links.mail}`"><img src="./images/mail.svg" alt="mail" />{{ links.mail }}</a>
-                            </div>
-                            <div class="footer-contacts_item">
-                                <a :href="`tel:${links.phone}`"><img src="./images/phone_foot.svg" alt="mail" />{{ links.phone }}</a>
-                            </div>
-                        </div>
+            <div class="map-wave">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#6A2EA6" fill-opacity="1" d="M0,0L30,0C60,0,120,0,180,32C240,64,300,128,360,144C420,160,480,128,540,133.3C600,139,660,181,720,186.7C780,192,840,160,900,176C960,192,1020,256,1080,272C1140,288,1200,256,1260,218.7C1320,181,1380,139,1410,117.3L1440,96L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-wrap">
+            <div class="footer-info">
+                3D Magic — это шанс воплотить в реальность мгновения, которые мы бережно храним в памяти, остановить время, когда мы счастливы, когда мы любим и любимы.
+            </div>
+            <div class="footer-contacts">
+                <div class="footer-contacts_block">
+                    <div class="footer-contacts_title">
+                        Способы связи
                     </div>
-                    <div class="footer-contacts_block">
-                        <div class="footer-contacts_links">
-                            <div class="footer-contacts_link">
-                                <a :href="`https://instagram.com/${links.ig}`" target="_blank"><img src="./images/instagram.svg" alt="instagram" /></a>
-                            </div>
-                            <div class="footer-contacts_link">
-                                <a :href="`whatsapp://send?text=Hello&phone=${links.wu}&abid=${links.wu}`" target="_blank"><img src="./images/whatsup.svg" alt="whatsup" /></a>
-                            </div>
-                            <div class="footer-contacts_link">
-                                <a :href="`https://t.me/${links.tg}`" target="_blank"><img src="./images/telegram.svg" alt="telegram" /></a>
-                            </div>
-                            <div class="footer-contacts_link">
-                                <a :href="`https://vk.com/${links.vk}`" target="_blank"><img src="./images/vk.svg" alt="vk" /></a>
-                            </div>
+                    <div class="footer-contacts_items">
+                        <div class="footer-contacts_item">
+                            <a :href="`mailto:${links.mail}`"><img src="./images/mail.svg" alt="mail" />{{ links.mail }}</a>
+                        </div>
+                        <div class="footer-contacts_item">
+                            <a :href="`tel:${links.phone}`"><img src="./images/phone_foot.svg" alt="mail" />{{ links.phone }}</a>
                         </div>
                     </div>
-                    <div class="footer-contacts_block">
-                        &copy;2020 Copyright
+                </div>
+                <div class="footer-contacts_block">
+                    <div class="footer-contacts_links">
+                        <div class="footer-contacts_link">
+                            <a :href="`https://instagram.com/${links.ig}`" target="_blank"><img src="./images/instagram.svg" alt="instagram" /></a>
+                        </div>
+                        <div class="footer-contacts_link">
+                            <a :href="`whatsapp://send?text=Hello&phone=${links.wu}&abid=${links.wu}`" target="_blank"><img src="./images/whatsup.svg" alt="whatsup" /></a>
+                        </div>
+                        <div class="footer-contacts_link">
+                            <a :href="`https://t.me/${links.tg}`" target="_blank"><img src="./images/telegram.svg" alt="telegram" /></a>
+                        </div>
+                        <div class="footer-contacts_link">
+                            <a :href="`https://vk.com/${links.vk}`" target="_blank"><img src="./images/vk.svg" alt="vk" /></a>
+                        </div>
                     </div>
                 </div>
+                <div class="footer-contacts_block">
+                    &copy;2020 Copyright
+                </div>
             </div>
-        </footer>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
-    <script>
+        </div>
+    </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+<script>
 
-        const APP = new Vue({
-            el: "#app",
-            data() {
-                return {
-                    threed: [
-                        {"id": 1, "icon": "statue.svg", "src": "itsatrap.png", "title": "Коллекционные фигурки", "text": "Миниатюрная 3D-копия – это оригинальный подарок по любому поводу, будь то праздник или желание подарить что-то приятное и эмоциональное. Мы изготавливаем 3D-фигурки по фотографии в любом масштабе, пропорциях и цветовой гамме."},
-                        {"id": 2, "icon": "cogs.svg", "src": "astolfo.jpg", "title": "Редкие детали", "text": "С другой стороны укрепление и развитие структуры влечет за собой процесс внедрения и модернизации дальнейших направлений развития. Равным образом новая модель организационной деятельности влечет за собой процесс внедрения и модернизации дальнейших направлений развития. "},
-                        {"id": 3, "icon": "house.svg", "src": "gachi2.jpg", "title": "Интерьерные эксклюзивы", "text": "Идейные соображения высшего порядка, а также сложившаяся структура организации влечет за собой процесс внедрения и модернизации систем массового участия. Не следует, однако забывать, что дальнейшее развитие различных форм деятельности требуют от нас анализа новых предложений. "},
-                        {"id": 4, "icon": "dots.svg", "src": "anime.jpg", "title": "Индивидуальные заказы", "text": "Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности способствует подготовки и реализации форм развития. Разнообразный и богатый опыт дальнейшее развитие различных форм деятельности играет важную роль в формировании систем массового участия. "}
-                    ],
-                    threedCur: 1,
-                    slides: [
-                        "slide-1.jpg",
-                        "slide-2.jpg",
-                        "slide-3.jpeg",
-                        "slide-4.jpeg",
-                        "slide-5.jpg"
-                    ],
-                    links: {
-                        phone: "+7 900 00 00",
-                        mail: "iognsdongj@mail.ru",
-                        vk: "3dmagic",
-                        tg: "3dmagic",
-                        wu: "+79000000",
-                        ig: "3dmagic"
+    const APP = new Vue({
+        el: "#app",
+        data() {
+            return {
+                threed: [
+                    {"id": 1, "icon": "statue.svg", "src": "itsatrap.png", "title": "Коллекционные фигурки", "text": "Миниатюрная 3D-копия – это оригинальный подарок по любому поводу, будь то праздник или желание подарить что-то приятное и эмоциональное. Мы изготавливаем 3D-фигурки по фотографии в любом масштабе, пропорциях и цветовой гамме."},
+                    {"id": 2, "icon": "cogs.svg", "src": "astolfo.jpg", "title": "Редкие детали", "text": "С другой стороны укрепление и развитие структуры влечет за собой процесс внедрения и модернизации дальнейших направлений развития. Равным образом новая модель организационной деятельности влечет за собой процесс внедрения и модернизации дальнейших направлений развития. "},
+                    {"id": 3, "icon": "house.svg", "src": "gachi2.jpg", "title": "Интерьерные эксклюзивы", "text": "Идейные соображения высшего порядка, а также сложившаяся структура организации влечет за собой процесс внедрения и модернизации систем массового участия. Не следует, однако забывать, что дальнейшее развитие различных форм деятельности требуют от нас анализа новых предложений. "},
+                    {"id": 4, "icon": "dots.svg", "src": "anime.jpg", "title": "Индивидуальные заказы", "text": "Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности способствует подготовки и реализации форм развития. Разнообразный и богатый опыт дальнейшее развитие различных форм деятельности играет важную роль в формировании систем массового участия. "}
+                ],
+                threedCur: 1,
+                slides: [
+                    "slide-1.jpg",
+                    "slide-2.jpg",
+                    "slide-3.jpeg",
+                    "slide-4.jpeg",
+                    "slide-5.jpg"
+                ],
+                links: {
+                    phone: "+7 900 00 00",
+                    mail: "iognsdongj@mail.ru",
+                    vk: "3dmagic",
+                    tg: "3dmagic",
+                    wu: "+79000000",
+                    ig: "3dmagic"
+                },
+                prices: [
+                    {
+                        id: 1,
+                        content: [
+                            {id: 1, price: "100", title: "Низкая скорость"}, {id: 2, price: "200", title: "Средняя скорость"}, {id: 3, price: "300", title: "Высокая скорость"}
+                        ]
                     },
-                    prices: [
-                        {
-                            id: 1,
-                            content: [
-                                {id: 1, price: "100", title: "Низкая скорость"}, {id: 2, price: "200", title: "Средняя скорость"}, {id: 3, price: "300", title: "Высокая скорость"}
-                            ]
-                        },
-                        {
-                            id: 2,
-                            content: [
-                                {id: 1, price: "1000", title: "Стоимость"}
-                            ]
-                        },
-                    ],
-                    pricesImages: [
-                        {id: 1, list: [{id: 1, src: "itsatrap.png"}, {id: 2, src: "astolfo.jpg"}, {id: 3, src: "anime.jpg"}]},
-                        {id: 2, list: [{id: 1, src: "gachi2.jpg"}]}
-                    ],
-                    currentPrices: 1,
-                    innerPrices: 3,
+                    {
+                        id: 2,
+                        content: [
+                            {id: 1, price: "1000", title: "Стоимость"}
+                        ]
+                    },
+                ],
+                pricesImages: [
+                    {id: 1, list: [{id: 1, src: "itsatrap.png"}, {id: 2, src: "astolfo.jpg"}, {id: 3, src: "anime.jpg"}]},
+                    {id: 2, list: [{id: 1, src: "gachi2.jpg"}]}
+                ],
+                currentPrices: 1,
+                innerPrices: 3,
+            }
+        },
+        methods: {
+            goTo(refName) {
+                let element = this.$refs[refName];
+                element.scrollIntoView({ behavior: 'smooth' });
+
+            },
+            rotatePricesImages(v) {
+                if(this.innerPrices !== v) {
+                    this.innerPrices = v;
+                    const temp = this.chosenImages.list.find(p => p.id === v)
+                    this.chosenImages.list = this.chosenImages.list.filter(p => p.id !== v)
+                    setTimeout(() => this.chosenImages.list.push(temp), 200)
                 }
             },
-            methods: {
-                goTo(refName) {
-                    let element = this.$refs[refName];
-                    element.scrollIntoView({ behavior: 'smooth' });
-
-                },
-                rotatePricesImages(v) {
-                    if(this.innerPrices !== v) {
-                        this.innerPrices = v;
-                        const temp = this.chosenImages.list.find(p => p.id === v)
-                        this.chosenImages.list = this.chosenImages.list.filter(p => p.id !== v)
-                        setTimeout(() => this.chosenImages.list.push(temp), 200)
-                    }
-                },
-                changePrices(v) {
-                    this.innerPrices = 1;
-                    this.currentPrices = v;
-                }
+            changePrices(v) {
+                this.innerPrices = 1;
+                this.currentPrices = v;
+            }
+        },
+        computed: {
+            chosenPrices() {
+                return this.prices.find(pr => pr.id === this.currentPrices)
             },
-            computed: {
-                chosenPrices() {
-                    return this.prices.find(pr => pr.id === this.currentPrices)
+            chosenImages() {
+                return this.pricesImages.find(pr => pr.id === this.chosenPrices.id)
+            }
+        },
+        mounted() {
+            let perV;
+            let zoom;
+
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                perV = 1
+                zoom = 9;
+            } else {
+                perV = 3
+                zoom = 11;
+            }
+
+            let mySwiper = new Swiper('.swiper-container', {
+                direction: 'horizontal',
+                loop: true,
+                autoplay: true,
+                speed: 1000,
+                spaceBetween: 0,
+                slidesPerView: perV,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
                 },
-                chosenImages() {
-                    return this.pricesImages.find(pr => pr.id === this.chosenPrices.id)
-                }
-            },
-            mounted() {
-                let perV;
-                let zoom;
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
 
-                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-                    perV = 1
-                    zoom = 9;
-                } else {
-                    perV = 3
-                    zoom = 11;
-                }
-
-                let mySwiper = new Swiper('.swiper-container', {
-                    direction: 'horizontal',
-                    loop: true,
-                    autoplay: true,
-                    speed: 1000,
-                    spaceBetween: 0,
-                    slidesPerView: perV,
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
+            ymaps.ready(init);
+            function init(){
+                // Создание карты.
+                let myMap = new ymaps.Map("map", {
+                    center: [55.76, 37.64],
+                    zoom: zoom
                 });
 
-                ymaps.ready(init);
-                function init(){
-                    // Создание карты.
-                    let myMap = new ymaps.Map("map", {
-                        center: [55.76, 37.64],
-                        zoom: zoom
+                let address = new ymaps.Placemark([55.608729, 37.210923],
+                    {}, {
+                        preset: 'islands#redIcon'
                     });
-
-                    let address = new ymaps.Placemark([55.608729, 37.210923],
-                        {}, {
-                            preset: 'islands#redIcon'
-                        });
-                    myMap.geoObjects.add(address);
-                    address = new ymaps.Placemark([55.656875, 37.963747]);
-                    myMap.geoObjects.add(address);
-                }
+                myMap.geoObjects.add(address);
+                address = new ymaps.Placemark([55.656875, 37.963747]);
+                myMap.geoObjects.add(address);
             }
-        })
-    </script>
+        }
+    })
+</script>
 </body>
 </html>
