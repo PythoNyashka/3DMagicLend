@@ -4,10 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Лендос</title>
-    <link href="index.css?_=2020.3" rel="stylesheet" />
-    <link href="mobile.css?_=2020.17" rel="stylesheet" />
+    <link href="index.css?_=2020.5" rel="stylesheet" />
+    <link href="mobile.css?_=2020.19" rel="stylesheet" />
     <!-- additional "price" block -->
     <link href="price.css?_=2020.11" rel="stylesheet" />
+
+    <style>
+        @keyframes move_wave {
+            0% {
+                transform: translateX(0) translateZ(0) scaleY(1)
+            }
+            50% {
+                transform: translateX(-25%) translateZ(0) scaleY(0.7)
+            }
+            100% {
+                transform: translateX(-50%) translateZ(0) scaleY(1)
+            }
+        }
+        .wave {
+            position: absolute;
+            left: 0;
+            width: 200%;
+            height: 240px;
+            background-repeat: repeat no-repeat;
+            background-position: 0 bottom;
+            transform-origin: center bottom;
+        }
+    </style>
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6463f77c-c580-443a-8d38-a9b2ff5db57f&lang=ru_RU" type="text/javascript"></script>
 </head>
@@ -40,9 +63,9 @@
                 </div>
             <div class="block-header_wave">
                 <div class="block-header_wave-svg">
-                    <svg style="margin-bottom: -5px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240">
-                        <path fill="#ffffff" fill-opacity="1" d="M0,160L48,181.3C96,203,192,245,288,229.3C384,213,480,139,576,128C672,117,768,171,864,176C960,181,1056,139,1152,133.3C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    </svg>
+                    <div class="wave" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png'); background-size: 50% 120px; animation: move_wave 30s linear infinite;">
+
+                    </div>
                 </div>
             </div>
         </section>

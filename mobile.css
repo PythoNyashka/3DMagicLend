@@ -41,10 +41,11 @@
     }
 
     .header-logo {
-        background: #FFF;
-        border-radius: 50%;
-        width: 48px;
-        height: 48px;
+        height: 56px;
+        background-image: url('./images/logo.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 160px;
     }
 
     .block-header {
@@ -74,7 +75,6 @@
 
     .block-header_block {
         margin-top: 36px;
-        margin-bottom: 200px;
     }
 
     .block-header_title {
@@ -116,6 +116,7 @@
 
     .block-header_wave {
         position: relative;
+        height: 240px;
     }
 
     /*.block-header_wave div {
@@ -125,7 +126,6 @@
 
     .block-header_wave-svg {
         width: 100%;
-        margin-top: -205px;
     }
 
     .block-header_wave-text {
