@@ -7,7 +7,7 @@
     <link href="index.css?_=2020.5" rel="stylesheet" />
     <link href="mobile.css?_=2020.24" rel="stylesheet" />
     <!-- additional "price" block -->
-    <link href="price.css?_=2020.16" rel="stylesheet" />
+    <link href="price.css?_=2020.18" rel="stylesheet" />
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6463f77c-c580-443a-8d38-a9b2ff5db57f&lang=ru_RU" type="text/javascript"></script>
 </head>
@@ -66,7 +66,7 @@
             <div class="threed-block_info-wrap">
                 <div v-for="t in threed" :key="`heh-${t.id}`" class="threed-block_info-trap">
                     <transition name="fade">
-                        <div v-if="threedCur === t.id" :style="`background-image: url('./images/${t.src}')`"></div>
+                        <div v-if="threedCur === t.id" :style="`background-image: url('./images/${t.src}');`"></div>
                     </transition>
                 </div>
                 <div class="threed-block_info">
@@ -125,9 +125,10 @@
                 <div class="price_images">
                     <transition-group name="list">
                         <div v-for="p in chosenImages.list" :key="p.src" class="price_image">
-                            <div :style="`background-image: url('./images/${p.src}');`"></div>
+                            <div class="price_image-src" :style="`background-image: url('./images/${p.src}');`  + (currentPrices === 2 && `top: 0; left: 0;`)"></div>
                         </div>
                     </transition-group>
+                    <div class="price_image-text">{{ chosenImages.list[innerPrices - 1].text }}</div>
                 </div>
                 <div class="price_buttons">
                     <div v-for="b in chosenPrices.content" :key="b.id" class="price_button-block">
@@ -250,6 +251,7 @@
         </div>
     </footer>
 </div>
+<script type="module" src="./js/scrollTo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
@@ -296,8 +298,8 @@
                     },
                 ],
                 pricesImages: [
-                    {id: 1, list: [{id: 1, src: "itsatrap.png"}, {id: 2, src: "astolfo.jpg"}, {id: 3, src: "anime.jpg"}]},
-                    {id: 2, list: [{id: 1, src: "gachi2.jpg"}]}
+                    {id: 1, list: [{id: 1, src: "itsatrap.png", text: "Какой-то текст"}, {id: 2, src: "astolfo.jpg", text: "Какой-то текст 2"}, {id: 3, src: "anime.jpg", text: "Какой-то текст 3"}]},
+                    {id: 2, list: [{id: 1, src: "gachi2.jpg", text: "Какой-то текст 4"}]}
                 ],
                 currentPrices: 1,
                 innerPrices: 3,
@@ -305,12 +307,24 @@
         },
         methods: {
             goTo(refName) {
+                function scrollToElement(element, duration) {
+                    var to = element.getBoundingClientRect().top;
+                    var from = window.pageYOffset;
+                    var start = performance.now();
+                    requestAnimationFrame(function animate(time) {
+                        var progress = (time - start) / duration;
+                        1 <= progress && (progress = 1);
+                        window.scrollTo(0, from + to* progress | 0);
+                        1 > progress && requestAnimationFrame(animate)
+                    })
+                }
+
                 let element = this.$refs[refName];
-                element.scrollIntoView({ behavior: 'smooth' });
+                scrollToElement(element, 500);
 
             },
-            rotatePricesImages(v) {
-                if(this.innerPrices !== v) {
+            rotatePricesImages(v, t = false) {
+                if(this.innerPrices !== v || t) {
                     this.innerPrices = v;
                     const temp = this.chosenImages.list.find(p => p.id === v)
                     this.chosenImages.list = this.chosenImages.list.filter(p => p.id !== v)
@@ -318,8 +332,9 @@
                 }
             },
             changePrices(v) {
-                this.innerPrices = 1;
+                this.innerPrices = v === 1 ? 3 : 1;
                 this.currentPrices = v;
+                this.rotatePricesImages(this.innerPrices, true)
             }
         },
         computed: {
