@@ -258,6 +258,8 @@
         </div>
     </footer>
 </div>
+<script src="./js/jquery-3.5.1.min.js"></script>
+<script src="./js/jquery.scrollTo.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
@@ -314,21 +316,9 @@
         },
         methods: {
             goTo(refName) {
-                function scrollToElement(element, duration) {
-                    var to = element.getBoundingClientRect().top;
-                    var from = window.pageYOffset;
-                    var start = performance.now();
-                    requestAnimationFrame(function animate(time) {
-                        var progress = (time - start) / duration;
-                        1 <= progress && (progress = 1);
-                        window.scrollTo(0, from + to* progress | 0);
-                        1 > progress && requestAnimationFrame(animate)
-                    })
-                }
-
-                let element = this.$refs[refName];
-                scrollToElement(element, 500);
-
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $("#" + refName).offset().top
+                }, 750);
             },
             rotatePricesImages(v, t = false) {
                 if(this.innerPrices !== v || t) {
