@@ -118,7 +118,6 @@
 
     .block-header_wave {
         position: relative;
-        height: 240px;
     }
 
     /*.block-header_wave div {
@@ -128,6 +127,7 @@
 
     .block-header_wave-svg {
         width: 100%;
+        margin-bottom: -8px;
     }
 
     .block-header_wave-text {
