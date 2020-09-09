@@ -58,8 +58,8 @@
     .block-header_wrap {
         background-image: url('./images/cheese.png');
         background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
+        background-size: cover;
+        background-position: center 64px;
         padding: 15px;
         max-width: 1503px;
         margin: 0 auto;

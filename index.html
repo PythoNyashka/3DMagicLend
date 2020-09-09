@@ -128,7 +128,7 @@
                             <div class="price_image-src" :style="`background-image: url('./images/${p.src}');`  + (currentPrices === 2 && `top: 0; left: 0;`)"></div>
                         </div>
                     </transition-group>
-                    <div class="price_image-text">{{ chosenImages.list[innerPrices - 1].text }}</div>
+                    <div class="price_image-text">{{ chosenText }}</div>
                 </div>
                 <div class="price_buttons">
                     <div v-for="b in chosenPrices.content" :key="b.id" class="price_button-block">
@@ -303,6 +303,7 @@
                 ],
                 currentPrices: 1,
                 innerPrices: 3,
+                chosenText: "Какой-то текст 3",
             }
         },
         methods: {
@@ -328,7 +329,10 @@
                     this.innerPrices = v;
                     const temp = this.chosenImages.list.find(p => p.id === v)
                     this.chosenImages.list = this.chosenImages.list.filter(p => p.id !== v)
-                    setTimeout(() => this.chosenImages.list.push(temp), 200)
+                    setTimeout(() => {
+                        this.chosenImages.list.push(temp);
+                        this.chosenText = temp.text;
+                    }, 200)
                 }
             },
             changePrices(v) {
@@ -343,7 +347,7 @@
             },
             chosenImages() {
                 return this.pricesImages.find(pr => pr.id === this.chosenPrices.id)
-            }
+            },
         },
         mounted() {
             let perV;

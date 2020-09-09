@@ -41,10 +41,12 @@
 .price_block {
     display: flex;
     margin-top: 24px;
+    min-height: 448px;
 }
 
 .price_block > div {
     width: 50%;
+    min-height: 100%;
 }
 
 .price_buttons {
@@ -85,6 +87,12 @@
 .price_images {
     position: relative;
     display: flex;
+}
+
+.price_images > span {
+    width: 100%;
+    position: relative;
+    margin-bottom: 16px;
 }
 
 .price_image, .price_image .price_image-src {
