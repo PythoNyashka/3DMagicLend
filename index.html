@@ -5,32 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Лендос</title>
     <link href="index.css?_=2020.5" rel="stylesheet" />
-    <link href="mobile.css?_=2020.23" rel="stylesheet" />
+    <link href="mobile.css?_=2020.24" rel="stylesheet" />
     <!-- additional "price" block -->
     <link href="price.css?_=2020.16" rel="stylesheet" />
-
-    <style>
-        @keyframes move_wave {
-            0% {
-                transform: translateX(0) translateZ(0) scaleY(1)
-            }
-            50% {
-                transform: translateX(-25%) translateZ(0) scaleY(0.7)
-            }
-            100% {
-                transform: translateX(-50%) translateZ(0) scaleY(1)
-            }
-        }
-        .wave {
-            position: absolute;
-            left: 0;
-            width: 200%;
-            height: 240px;
-            background-repeat: repeat no-repeat;
-            background-position: 0 bottom;
-            transform-origin: center bottom;
-        }
-    </style>
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=6463f77c-c580-443a-8d38-a9b2ff5db57f&lang=ru_RU" type="text/javascript"></script>
 </head>
@@ -63,7 +40,7 @@
         </div>
         <div class="block-header_wave">
             <div class="block-header_wave-svg">
-                <div class="wave" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png'); background-size: 50% 90px; animation: move_wave 30s linear infinite;">
+                <div class="wave" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png'); background-size: 50% 60px; animation: move_wave 0s linear infinite;">
 
                 </div>
             </div>
@@ -171,7 +148,7 @@
                             Введите ваше имя:
                         </div>
                         <div class="form_field-input">
-                            <input placeholder="Ваше имя..." />
+                            <input name="name" placeholder="Ваше имя..." />
                         </div>
                     </div>
                     <div class="form_field">
@@ -179,9 +156,12 @@
                             Введите ваш номер телефона или E-mail:
                         </div>
                         <div class="form_field-input">
-                            <input placeholder="Номер телефона или E-mail..." />
+                            <input name="contact" placeholder="Номер телефона или E-mail..." />
                         </div>
                     </div>
+                </div>
+                <div class="form_fields">
+                    <textarea name="message" placeholder="Сообщение..."></textarea>
                 </div>
                 <div class="form-btn">
                     <button>Отправить</button>
